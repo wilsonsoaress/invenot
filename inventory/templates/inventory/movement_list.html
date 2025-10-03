@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Movimentações</title>
+    <style>
+        body { font-family: sans-serif; background-color: #f4f4f4; padding: 20px; color: #333; }
+        .container { max-width: 900px; margin: 0 auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #0056b3; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 12px; border: 1px solid #ddd; text-align: left; }
+        th { background-color: #f2f2f2; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+        .actions a { margin-right: 10px; text-decoration: none; }
+        .edit-btn { color: #ffc107; }
+        .delete-btn { color: #dc3545; }
+        .nav { text-align: center; margin-bottom: 20px; }
+        .nav a { margin: 0 15px; text-decoration: none; color: #007bff; font-weight: bold; font-size: 16px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <a href="{% url 'device_list' %}">Listar Dispositivos</a>
+            <a href="{% url 'movement_list' %}">Listar Movimentações</a>
+            <a href="{% url 'register_movement' %}">Registrar Nova</a>
+        </div>
+        <h1>Movimentações Registradas</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Dispositivo</th>
+                    <th>Cliente</th>
+                    <th>Tipo</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for movimentacao in movimentacoes %}
+                <tr>
+                    <td>{{ movimentacao.movement_date|date:"d/m/Y" }}</td>
+                    <td>{{ movimentacao.device }}</td>
+                    <td>{{ movimentacao.client }}</td>
+                    <td>{{ movimentacao.get_movement_type_display }}</td>
+                    <td class="actions">
+                        <a href="{% url 'movement_update' pk=movimentacao.pk %}" class="edit-btn">Editar</a>
+                        <a href="{% url 'movement_delete' pk=movimentacao.pk %}" class="delete-btn">Excluir</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">Nenhuma movimentação registrada ainda.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

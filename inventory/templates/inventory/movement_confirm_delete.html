@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmar Exclusão</title>
+    <style>
+        body { font-family: sans-serif; background-color: #f4f4f4; padding: 20px; }
+        .container { max-width: 600px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); text-align: center; }
+        h1 { color: #dc3545; }
+        .btn { padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; text-decoration: none; color: white; font-size: 16px; margin: 0 10px; }
+        .delete-btn { background-color: #dc3545; }
+        .cancel-btn { background-color: #6c757d; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tem certeza?</h1>
+        <p>Você está prestes a excluir a movimentação:</p>
+        <p><strong>{{ movimentacao }}</strong></p>
+        <p>Esta ação não pode ser desfeita.</p>
+        <br>
+        <form method="post">
+            {% csrf_token %}
+            <a href="{% url 'movimentacao_list' %}" class="btn cancel-btn">Cancelar</a>
+            <button type="submit" class="btn delete-btn">Sim, Excluir</button>
+        </form>
+    </div>
+</body>
+</html>

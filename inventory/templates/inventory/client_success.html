@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Sucesso!</title>
+    <style>
+        body { text-align: center; font-family: sans-serif; padding: 40px; }
+        .container { max-width: 500px; margin: 0 auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #28a745; } a { background-color: #007bff; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px; margin: 5px; display: inline-block; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cliente cadastrado com sucesso!</h1>
+        <br>
+        <a href="{% url 'register_client' %}">Cadastrar Novo Cliente</a>
+        <a href="{% url 'register_movement' %}">Registrar Movimentação</a>
+    </div>
+</body>
+</html>

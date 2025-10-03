@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Nova Inspeção</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; background: #fff; padding: 30px; border-radius: 8px; }
+        h1, h2 { text-align: center; }
+        form p { display: flex; flex-direction: column; margin-bottom: 15px; }
+        form label { font-weight: bold; margin-bottom: 5px; }
+        form input, form select, form textarea { padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
+        .hidden { display: none; } /* Classe para esconder campos */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Nova Inspeção</h1>
+        <h2>{{ device }}</h2>
+        <hr>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Salvar Inspeção</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mapeamento dos campos: [campo_gatilho, valor_gatilho, campo_alvo]
+            const conditionalFields = [
+                ['id_physical_state', 'outros', 'id_physical_state_other'],
+                ['id_has_charger', true, 'id_charger_condition'],
+                ['id_configuration', 'modificado', 'id_configuration_mods'],
+                ['id_has_office', true, 'id_office_version'],
+                ['id_has_office', true, 'id_office_key'],
+            ];
+
+            function toggleField(triggerElement, triggerValue, targetElement) {
+                const targetWrapper = targetElement.closest('p');
+                let isVisible = false;
+
+                if (triggerElement.type === 'checkbox') {
+                    isVisible = triggerElement.checked === triggerValue;
+                } else {
+                    isVisible = triggerElement.value === triggerValue;
+                }
+
+                if (isVisible) {
+                    targetWrapper.classList.remove('hidden');
+                } else {
+                    targetWrapper.classList.add('hidden');
+                }
+            }
+
+            conditionalFields.forEach(([triggerId, triggerValue, targetId]) => {
+                const triggerElement = document.getElementById(triggerId);
+                const targetElement = document.getElementById(targetId);
+
+                if (triggerElement && targetElement) {
+                    // Estado inicial ao carregar a página
+                    toggleField(triggerElement, triggerValue, targetElement);
+                    // Adiciona o listener para mudanças
+                    triggerElement.addEventListener('change', () => toggleField(triggerElement, triggerValue, targetElement));
+                }
+            });
+        });
+    </script>
+</body>
+</html>
