@@ -1,7 +1,3 @@
-Com certeza! Criar um bom arquivo README.md é essencial para documentar e apresentar seu projeto. Baseado em tudo que construímos, preparei um texto completo que você pode usar.
-
-Copie e cole o texto abaixo em um novo arquivo chamado README.md na pasta principal do seu projeto (a mesma pasta do manage.py).
-
 Sistema de Inventário de Ativos de TI
 Este é um sistema web desenvolvido com Django para gerenciar o ciclo de vida de ativos de TI, como desktops e notebooks. O projeto foi criado para centralizar o controle de equipamentos, registrar suas movimentações entre clientes e manter um histórico detalhado de inspeções e alterações.
 
